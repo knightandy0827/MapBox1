@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<title>NCTU Map Prototype</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width: 94%; right:0}
+#sidebar { position:absolute; top:0;bottom:0; width:33.3333%; background-color:grey;} 
+#resultbar{ position:absolute; left: 2.6%; top: 10%; bottom: 5%; width: 28%; background-color:white;}
+</style>
+</head>
+<body>
+
+
+
+
+
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='mapboxstyle.css' type='text/css' />
+<div id='map'></div>
+
+<div id='sidebar'></div> 
+
+<script>
+var bounds = [
+    [120.935, 24.777],
+    [121.010, 24.802]
+];
+mapboxgl.accessToken = 'pk.eyJ1Ijoia25pZ2h0YW5keSIsImEiOiJjank4MnBzaW8wNXZ3M21yejN0b2VzenBxIn0.dYaq_ihOAviYVnNmbEiRwQ';
+var map = new mapboxgl.Map({
+    z:-1,
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+    center: [120.985, 24.789], // starting position [lng, lat]
+    zoom: 14, // starting zoom
+    maxBounds: bounds
+});
+map.on('load', function() {
+    map.setPaintProperty('building', 'fill-color', [
+        "interpolate",
+        ["exponential", 0.5],
+        ["zoom"],
+            15,
+                "#a31c1c",
+            22,
+        "#e6bf8a"
+    ]);
+ 
+    map.setPaintProperty('building', 'fill-opacity', [
+"interpolate",
+["exponential", 0.7],
+["zoom"],
+15,
+0,
+22,
+1
+]);
+});
+map.addControl(new MapboxGeocoder({
+    z: 1,
+    bbox: [120.935, 24.777, 121.010, 24.802],
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    marker: {
+        color: "red"
+    }
+}), 'top-left');
+ 
+if(x){
+    ok;
+}
+
+
+
+</script>
+ 
+</body>
+</html>
