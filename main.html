@@ -24,6 +24,7 @@ body { margin:0; padding:0; }
 <div id='map'></div>
 
 <div id='sidebar'></div> 
+<div id='nothing'></div>
 
 <script>
 var bounds = [
@@ -60,7 +61,8 @@ map.on('load', function() {
 1
 ]);
 });
-map.addControl(new MapboxGeocoder({
+
+var geocoder = new MapboxGeocoder({
     z: 1,
     bbox: [120.935, 24.777, 121.010, 24.802],
     accessToken: mapboxgl.accessToken,
@@ -68,11 +70,19 @@ map.addControl(new MapboxGeocoder({
     marker: {
         color: "red"
     }
-}), 'top-left');
- 
-if(x){
-    ok;
-}
+});
+map.addControl(geocoder, 'top-left');
+//console.log("hi");
+
+
+
+geocoder.on('result', function(result) {
+   console.log(result);
+if(result!='undefined'){
+    document.getElementById('nothing').setAttribute('id','resultbar');}
+
+})
+
 
 
 
